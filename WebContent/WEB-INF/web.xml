@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding= "UTF-8"?>
+<web-app version="2.5"
+       xmlns="http://java.sun.com/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" >
+	<!-- 定义servlet-->
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>com.haiersoft.ch01.framework.Controller</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<!-- 请求匹配类型 -->
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ConfigTest</servlet-name>
+		<servlet-class>ConfigTestServlet</servlet-class>
+		<init-param>
+			<param-name>firstName</param-name>
+			<param-value>zhang</param-value>
+		</init-param>
+		<init-param>
+			<param-name>lastName</param-name>
+			<param-value>san</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ConfigTest</servlet-name>
+		<!-- 请求匹配类型 -->
+		<url-pattern>/demo/config.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AnyName</servlet-name>
+		<servlet-class>ThreadServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>AnyName</servlet-name>
+		<!-- 请求匹配类型 -->
+		<url-pattern>/demo/hello.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CacheServlet</servlet-name>
+		<servlet-class>CacheServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CacheServlet</servlet-name>
+		<!-- 请求匹配类型 -->
+		<url-pattern>/servlet/CacheServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FileAccessServlet</servlet-name>
+		<servlet-class>FileAccessServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>FileAccessServlet</servlet-name>
+		<!-- 请求匹配类型 -->
+		<url-pattern>/servlet/FileAccessServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>HttpResponseGetServlet</servlet-name>
+		<servlet-class>com.servlet.HttpResponseGetServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>HttpResponseGetServlet</servlet-name>
+		<!-- 请求匹配类型 -->
+		<url-pattern>/demo/hello123</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>HttpResponseServlet</servlet-name>
+		<servlet-class>com.servlet.HttpResponseServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>HttpResponseServlet</servlet-name>
+		<!-- 请求匹配类型 -->
+		<url-pattern>/demo/httpRequest</url-pattern>
+	</servlet-mapping>
+	
+ 	<welcome-file-list >
+    	<welcome-file >index.jsp</welcome-file>
+  	</welcome-file-list >
+</web-app>
