@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,13 +53,70 @@ public class HttpResponseServlet extends HttpServlet {
 		doPost(request, response);
 	}
 	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("=============++++++++++++===");
+		String fileName = "abcd";
+		String fileType = "doc";
+		if (("doc".equals(fileType) || "docx".equals(fileType))) {
+			// word
+			response.setContentType("application/vnd.ms-word;charset=UTF-8");
+			response.setHeader("Content-Disposition", "attachment;filename="
+					+ fileName + "." + fileType);
+		} else {
+			// excel
+			response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+			response.setHeader("Content-Disposition", "attachment;filename="
+					+ fileName + "." + fileType);
+		}
+			//定义读取文件所在的目录
+            String filePath = "E:\\test.doc"; 
+            InputStream in = null;
+			ServletOutputStream servletOutputStream = null;
+            try {
+            	in = new FileInputStream(filePath);
+     			servletOutputStream = response.getOutputStream();
+     			final int size = 1024;
+     			byte[] buffer = new byte[size];
+     			int length;
+     			while ((length = in.read(buffer)) > 0) {
+     				servletOutputStream.write(buffer, 0, length);
+     			}
+     		} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+     			try {
+     				if(servletOutputStream != null) {
+     					servletOutputStream.flush();
+     	 				servletOutputStream.close();
+     				}
+     			} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+     				if(in != null) {
+     					try {
+							in.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+     				}
+     			}
+     		}
+	}
+	
 	/**
 	 * 功能 : 处理post方式的请求
 	 * 开发：zwwang 2016-11-28 下午8:09:58
 	 * @param request
 	 * @param response
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) {
+	public void doPost1(HttpServletRequest request, HttpServletResponse response) {
 		
 		//原生ajax跨域访问时允许返回
 		response.addHeader("Access-Control-Allow-Origin", "http://localhost:8081");

@@ -16,8 +16,28 @@
 			
 		});
 
+		function downloadFile() {
+			alert(3);
+			//var url = "http://localhost:8080/Servlet/demo/httpRequest";
+			var url = "https://www.baidu.com/index.php?tn=98012088_2_dg&ch=14";
+			var form=$("<form>");//定义一个form表单
+			form.attr("style","display:none");
+			form.attr("target","");
+			form.attr("method","post");
+			form.attr("action",url);
+			var input1=$("<input>");
+			input1.attr("type","hidden");
+			input1.attr("name","exportData");
+			input1.attr("value",(new Date()).getMilliseconds());
+			$("body").append(form);//将表单放置在web中
+			form.append(input1);
+			
+			form.submit();//表单提交 
+		}
+
 	</script>
 	<script type="text/javascript">
+
 
 	var url = "http://localhost:8080/Servlet/demo/httpRequest";
 	var params = {};
@@ -41,6 +61,16 @@
 		
 		ajaxRequest(url, "POST", formData);
 	}
+
+	function downloadFiles() {
+
+		alert(2);
+		var url = "http://localhost:8080/Servlet/demo/httpRequest";
+		var formData = new FormData();
+		formData.append("name", "liucheng");
+		formData.append("address", "jiangsu");
+		ajaxRequest(url, "POST", formData);
+	}
 	
 	function ajaxRequest(url, method, params) {
 
@@ -52,7 +82,7 @@
 			return;
 		}
 		
-		ajaxObject.onreadystatechange = callback;
+		//ajaxObject.onreadystatechange = callback;
 		if (method == "GET") {
 
 			url += ("?" + formParams(params)); 
@@ -60,7 +90,7 @@
 			ajaxObject.send(null);
 		} else if (method == "POST") {
 
-			ajaxObject.open(method, url);
+			ajaxObject.open(method, url, true);
 			//设置请求消息头为如下的值：
             //Content-Type:application/x-www-form-urlencoded
            // ajaxObject.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -111,7 +141,7 @@
             if(this.status == 200) {
 
                // alert("响应头部:" + this.getAllResponseHeaders());
-                alert("响应内容:" + this.responseText);
+               // alert("响应内容:" + this.responseText);
             } else {
 
 	            alert("HTTP请求错误！错误码："+this.status);
@@ -218,5 +248,25 @@
 	<a onclick="$('input[id=ajaxUpLoadFile2]').click();">浏览...</a>
 	<div>
 	</div>
+	
+	<input type="button" id="downloadFile" value="下载文件" onclick="downloadFile();"/>
+
+<form name='form1' action='http://www.baidu.com' method='post'>  
+  
+   
+  
+<input type='hidden' name='page' value='1'/>  
+  
+   
+  
+<input type='hidden' name='hiddenA' value='A'/>  
+  
+   
+  
+<a href='javascript:document.form1.submit();'><font color='#000000'>首页</font></a>  
+  
+   
+  
+</form>  
 </body>
 </html>
